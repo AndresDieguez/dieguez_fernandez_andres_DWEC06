@@ -1,0 +1,19 @@
+<!-- detalle del producto -->
+<div class="container custom-container mt-4">
+  <div *ngIf="product" class="card shadow-lg">
+    <div class="row">
+      <div class="col">
+        <img [src]="product.images[0]" class="img-fluid rounded-start" alt="{{ product.title }}">
+      </div>
+      <div class="col p-4">
+        <h2>{{ product.title }}</h2>
+        <p class="text-muted">{{ product.brand }} - {{ product.category }}</p>
+        <p>{{ product.description }}</p>
+        <h4 class="fw-bold">Precio: {{ product.price }}€</h4>
+        <h5 class="mt-4"> ¿Te interesa este producto?</h5>
+        <p>Obten un <strong>descuento del 15%</strong> en este producto si acudes a nuestra próxima inaguración indicando el código: <strong>MIPRIMERACOMPRA15</strong></p>
+        <a routerLink="/tienda" class="btn btn-secondary">Volver al catálogo</a>
+      </div>
+    </div>
+  </div>
+</div>

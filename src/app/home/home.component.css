@@ -1,0 +1,10 @@
+.btn-primary {
+    --bs-btn-bg: #0bc5d9;
+  }
+  .btn {
+    border: var(--bs-btn-border-width) solid #0bc5d9;
+  }
+  .carousel-caption.d-none.d-md-block {
+    background: rgba(0,0,0,0.5);
+    border-radius: 100px;
+  }

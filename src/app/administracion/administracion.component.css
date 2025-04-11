@@ -1,0 +1,13 @@
+.card {
+  border-radius: 10px;
+}
+
+.btn {
+  border-radius: 5px;
+}
+.btn-primary {
+  --bs-btn-bg: #0bc5d9;
+}
+.btn {
+  border: var(--bs-btn-border-width) solid #0bc5d9;
+}

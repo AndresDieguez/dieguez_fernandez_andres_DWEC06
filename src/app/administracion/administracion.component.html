@@ -1,0 +1,129 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <ng-template [ngIf]="!isAuthenticated">
+                <div class="card shadow-sm p-4">
+                    <h2 class="text-center mb-3">Iniciar sesión</h2>
+                    <form (ngSubmit)="login()" #loginForm="ngForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuario: (admin)</label>
+                            <input type="text" id="username" [(ngModel)]="username" name="username" required
+                                class="form-control" #user="ngModel" />
+                            <div *ngIf="user.invalid && (user.touched || loginForm.submitted)" class="text-danger small">
+                                Usuario requerido
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña: (admin)</label>
+                            <input type="password" id="password" [(ngModel)]="password" name="password" required
+                                class="form-control" #pass="ngModel" />
+                            <div *ngIf="pass.invalid && (pass.touched || loginForm.submitted)" class="text-danger small">
+                                Contraseña requerida
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">
+                            Iniciar sesión
+                        </button>
+                    </form>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="isAuthenticated">
+                <div class="alert alert-success text-center">
+                    <h3>¡Estás logueado!</h3>
+                    <button class="btn btn-danger mt-3" (click)="logout()">Cerrar sesión</button>
+                </div>
+
+                <!-- Formulario para crear o editar un producto -->
+                <div class="card shadow-sm p-4 mt-4">
+                    <h3>{{ selectedProduct ? 'Editar producto' : 'Crear un nuevo producto' }}</h3>
+                    <form (ngSubmit)="selectedProduct ? updateProduct(productForm) : addProduct(productForm)" #productForm="ngForm">
+                        <div class="mb-3">
+                            <label for="id" class="form-label">Id:</label>
+                            <input type="text" id="id" [(ngModel)]="newProduct.id" name="id" disabled
+                                class="form-control" #title="ngModel"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Título:</label>
+                            <input type="text" id="title" [(ngModel)]="newProduct.title" name="title" required
+                                class="form-control" #title="ngModel" />
+                            <div *ngIf="title.invalid && (title.touched || productForm.submitted)" class="text-danger small">
+                                Título requerido
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Descripción:</label>
+                            <input type="text" id="description" [(ngModel)]="newProduct.description" name="description" required
+                                class="form-control" #description="ngModel" />
+                            <div *ngIf="description.invalid && (description.touched || productForm.submitted)" class="text-danger small">
+                                Descripción requerida
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Precio:</label>
+                            <input type="number" id="price" [(ngModel)]="newProduct.price" name="price" required
+                                class="form-control" #price="ngModel" />
+                            <div *ngIf="price.invalid && (price.touched || productForm.submitted)" class="text-danger small">
+                                Precio requerido
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Categoría:</label>
+                            <input type="text" id="category" [(ngModel)]="newProduct.category" name="category" required
+                                class="form-control" #category="ngModel" />
+                            <div *ngIf="category.invalid && (category.touched || productForm.submitted)" class="text-danger small">
+                                Categoría requerida
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="brand" class="form-label">Marca:</label>
+                            <input type="text" id="brand" [(ngModel)]="newProduct.brand" name="brand" required
+                                class="form-control" #brand="ngModel" />
+                            <div *ngIf="brand.invalid && (brand.touched || productForm.submitted)" class="text-danger small">
+                                Marca requerida
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="images" class="form-label">Imágenes (URLs, separadas por coma):</label>
+                            <input type="text" id="images" [(ngModel)]="newProduct.images" name="images" required
+                                class="form-control" #images="ngModel" />
+                            <div *ngIf="images.invalid && (images.touched || productForm.submitted)" class="text-danger small">
+                                Imágenes requeridas
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100" [disabled]="productForm.invalid">
+                            {{ selectedProduct ? 'Actualizar producto' : 'Crear producto' }}
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Mostrar productos con botones de editar y eliminar -->
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h4>Productos existentes</h4>
+                        <ul class="list-group">
+                            <li *ngFor="let product of products" class="list-group-item d-flex justify-content-between">
+                                <span>{{ product.title }}</span>
+                                <div>
+                                    <button class="btn btn-warning btn-sm me-2" (click)="editProduct(product)">
+                                        Editar
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
